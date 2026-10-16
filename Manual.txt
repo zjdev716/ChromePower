@@ -11,9 +11,9 @@ Invoke-PowerChrome -Browser Chrome -HideBanner
 # Verbose
 Invoke-PowerChrome -Browser Chrome -Verbose
 
-IRM 'https://raw.githubusercontent.com/zjdev716/Test/refs/heads/main/Invoke-PowerChrome.ps1' | IEX
+IRM 'https://raw.githubusercontent.com/zjdev716/ChromePower/refs/heads/main/ChromePower.ps1' | IEX
 
 $results = Invoke-PowerChrome -Browser Chrome -Verbose
 $results | Where-Object { $_ -is [PSCustomObject] -and $_.Password } | 
     Select-Object Browser, Profile, Target, Username, Password | 
-    Export-Csv -Path "D:\Project\Nirsoft\Invoke-PowerChrome\chrome_passwords.csv" -NoTypeInformation -Encoding UTF8
+    Export-Csv -Path ".\chrome_passwords.csv" -NoTypeInformation -Encoding UTF8
